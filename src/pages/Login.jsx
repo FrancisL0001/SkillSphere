@@ -99,7 +99,7 @@ const Login = () => {
                 <p className="text-sm text-center text-slate-500">
                     Don't have an account? <a href="/register" className="text-blue-500 font-semibold hover:underline hover:text-base-300"> Sign up </a>                        
                 </p>
-                <Link to={"/change-password"} className="text-blue-500 font-semibold hover:underline hover:text-base-300 text-sm text-center mt-2">
+                <Link to={"/forgot-password"} className="text-blue-500 font-semibold hover:underline hover:text-base-300 text-sm text-center mt-2">
                     Forgot Password?
                 </Link>
             </div>

@@ -44,7 +44,7 @@ const Register = () => {
         <div className="card w-full md:max-w-2xl md:h-fit">
             <div className="card-body">
                 <Link to={"/"}>
-                    <img src="public\skillsphere.png" alt="SkillSphere Logo" className="mx-auto mb-4 size-20" />
+                    <img src="\skillsphere.png" alt="SkillSphere Logo" className="mx-auto mb-4 size-20" />
                 </Link>
                 <h1 className="card-title text-2xl md:text-3xl text-center mx-auto font-bold mb-4">Create your Account</h1>
                 <form onSubmit={handleRegister}>

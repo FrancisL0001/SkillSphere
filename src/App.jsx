@@ -3,7 +3,7 @@ import Home from "./pages/Home.jsx";
 import Explore from "./pages/Explore.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
-import ChangePassword from "./pages/ChangePassword.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
 
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/explore" element={<Explore />} />
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Register />}/>
-        <Route path="/change-password" element={<ChangePassword/>}/>
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
       </Routes>
     </div>
   );
