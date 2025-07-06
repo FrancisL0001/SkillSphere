@@ -1,16 +1,38 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import SearchBar from "../components/SearchBar";
 import ProjectCard from "../components/ProjectCard";
+import toast from "react-hot-toast";
 
 const Explore = () => {
 
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const isInitialMount = useRef(true);
 
+  const handleSearch = useCallback((filters) => {
+
+    const { searchTerm, category, difficulty, time } = filters;
+
+    console.log("Search Filters: ", filters);
+    console.log(projects);
+
+    const results = projects.filter(project => {
+      const matchesSearch = searchTerm ? project.title.toLowerCase().includes(searchTerm.toLowerCase()) : true ;
+      const matchesCategory = category ? project.category === category : true;
+      const matchesDifficulty = difficulty ? project.difficulty === difficulty : true;
+      const matchesTime = time ? project.duration === time : true;
+      
+      return matchesSearch && matchesCategory && matchesDifficulty && matchesTime;
+    });
+
+    console.log(results);
+
+    setFilteredProjects(results);
+  }, [projects]); 
 
   useEffect(() => {
     const getProjects = async () => {
@@ -37,33 +59,20 @@ const Explore = () => {
         ];
         setProjects(articles);
         setFilteredProjects(articles);
-        setLoading(false);
+
         setError(false);
       } catch (error) {
+        toast.error("Failed to load projects");
         setError('Failed to load projects!');
         console.error("Error encoutered fetching projects: ", error);
+      } finally {
         setLoading(false);
       }
     };
+
     getProjects();
 
   }, []);
-
-
-  const handleSearch = (filters) => {
-    const { searchTerm, category, difficulty, time } = filters;
-
-    const results = projects.filter(project => {
-      const matchesSearch = searchTerm ? project.title.toLowerCase().includes(searchTerm.toLowerCase()) : true ;
-      const matchesCategory = category ? project.category === category : true;
-      const matchesDifficulty = difficulty ? project.difficulty === difficulty : true;
-      const matchesTime = time ? project.time === time : true;
-      
-      return matchesSearch && matchesCategory && matchesDifficulty && matchesTime;
-    });
-
-    setFilteredProjects(results);
-  }; 
 
 
   return (
@@ -71,7 +80,7 @@ const Explore = () => {
         <header className="flex flex-col mb-4 border-b-2 pb-2">
             <Header page={null}/>
             <div className="max-w-full">
-              <SearchBar onSearch={handleSearch}/>
+              <SearchBar onSearch={handleSearch} initialSearch={!isInitialMount.current}/>
             </div>
         </header> 
 

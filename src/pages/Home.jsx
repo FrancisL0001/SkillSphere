@@ -57,7 +57,7 @@ const Home = () => {
                         <Compass/>
                         Explore Projects
                     </Link>
-                    <Link to={"/create"} className="btn btn-active text-center h-fit rounded-xl my-2">
+                    <Link to={"/login"} className="btn btn-active text-center h-fit rounded-xl my-2">
                         <PlusCircle/>
                         Create Your Own
                     </Link>
