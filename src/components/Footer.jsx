@@ -1,4 +1,4 @@
-import Navbar from "./navbar"
+import Navbar from "./navbar.jsx"
 
 const Footer = ({page}) => {
   return (
